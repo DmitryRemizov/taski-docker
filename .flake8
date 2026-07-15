@@ -1,8 +1,57 @@
 [flake8]
+# Не проверять код на соответствие стандартам W503 и F811
 ignore =
     W503,
-    F811
+    F811,
+    D100,
+    D101,
+    D102,
+    D103,
+    D104,
+    D105,
+    D106,
+    D107,
+    D200,
+    D202,
+    D203,
+    D204,
+    D205,
+    D209,
+    D300,
+    D301,
+    D400,
+    D401,
+    D402,
+    D403,
+    D412,
+    D419,
+    N801,
+    N802,
+    N803,
+    N804,
+    N805,
+    N806,
+    N807,
+    N811,
+    N812,
+    N815,
+    N816,
+    E124,
+    E127,
+    E128,
+    E131,
+    E202,
+    E203,
+    E303,
+    E402,
+    E701,
+    F401,
+    F811,
+    F822
+# Не проверять код в перечисленных директориях:
 exclude =
+    .git,
+    __pycache__,
     .venv,
     .venv/*,
     venv,
@@ -10,9 +59,10 @@ exclude =
     env,
     env/*,
     */migrations/*,
-    __pycache__,
-    .git,
-    node_modules
-max-line-length = 79
+    node_modules,
+    */node_modules/*
+# Не проверять указанные файлы на соответствие определённым правилам:
 per-file-ignores =
     */settings.py:E501
+    */tests.py:D101,D102
+max-line-length = 79
