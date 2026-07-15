@@ -30,6 +30,22 @@ jobs:
           python -m pip install --upgrade pip setuptools
           pip install flake8==7.3.0 flake8-isort==7.0.0
           pip install -r ./backend/requirements.txt
+          pip install psycopg2-binary
+
+      - name: Create .flake8 config
+        run: |
+          cat > .flake8 << 'EOF'
+          [flake8]
+          exclude =
+              .venv,
+              venv,
+              */migrations/*,
+              __pycache__
+          max-line-length = 79
+          ignore = W503, F811
+          per-file-ignores =
+              */settings.py:E501
+          EOF
 
       - name: Test with flake8 and django tests
         env:
@@ -156,4 +172,4 @@ jobs:
             sudo docker compose -f docker-compose.production.yml up -d
             sudo docker compose -f docker-compose.production.yml exec -T backend python manage.py migrate
             sudo docker compose -f docker-compose.production.yml exec -T backend python manage.py collectstatic --noinput
-            sudo docker compose -f docker-compose.production.yml exec -T backend cp -r /app/collected_static/. /backend_static/static/
+            sudo docker compose -f docker-compose.production.yml exec -T backend cp -r /app/collected_static/. /backend_static/
