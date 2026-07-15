@@ -17,7 +17,12 @@ jobs:
           POSTGRES_DB: django_db
         ports:
           - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+          --health-start-period 30s
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -31,21 +36,6 @@ jobs:
           pip install flake8==7.3.0 flake8-isort==7.0.0
           pip install -r ./backend/requirements.txt
           pip install psycopg2-binary
-
-      - name: Create .flake8 config
-        run: |
-          cat > .flake8 << 'EOF'
-          [flake8]
-          exclude =
-              .venv,
-              venv,
-              */migrations/*,
-              __pycache__
-          max-line-length = 79
-          ignore = W503, F811
-          per-file-ignores =
-              */settings.py:E501
-          EOF
 
       - name: Test with flake8 and django tests
         env:
