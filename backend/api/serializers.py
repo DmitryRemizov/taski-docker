@@ -13,3 +13,5 @@ class TaskSerializer(serializers.ModelSerializer):
 
         model = Task
         fields = ('id', 'title', 'description', 'completed')
+
+
