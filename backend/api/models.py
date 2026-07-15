@@ -13,5 +13,3 @@ class Task(models.Model):
     def __str__(self):
         """Return string representation of the task."""
         return self.title
-
-
