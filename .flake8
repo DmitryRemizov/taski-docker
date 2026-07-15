@@ -1,0 +1,18 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    .venv/*,
+    venv,
+    venv/*,
+    */venv,
+    */venv/*,
+    env,
+    env/*,
+    */migrations/*,
+    node_modules
+max-line-length = 79
+ignore = W503, F811
+per-file-ignores =
+    */settings.py:E501
